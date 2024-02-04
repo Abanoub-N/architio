@@ -1,0 +1,20 @@
+// Import Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Import Slick
+@import "slick-carousel/slick/slick.scss";
+
+// Import theme styles
+@import './common/varialbes';
+@import './common/loop';
+@import './common/fonts';
+@import './common/global';
+@import './common/helper';
+
+// import layout
+@import './layout/header';
+@import './layout/footer';
+@import './layout/archive';
+@import './layout/single';
+
+// import blocks

@@ -1,0 +1,206 @@
+@use 'sass:list';
+
+@each $theme-color in $theme-all-color {
+  $name: list.nth($theme-color, 1);
+  $brand-color: list.nth($theme-color, 2);
+  $brand-text: list.nth($theme-color, 3);
+  $brand-text-secondry: list.nth($theme-color, 4);
+
+  .bg-#{$name} {
+    background-color: $brand-color !important;
+
+    .text-secondry-color {
+      background-color: $brand-text-secondry !important;
+    }
+
+    a,
+    button {
+      &.text-secondry-color {
+        color: $brand-text-secondry;
+      }
+
+      &:hover {
+        color: $brand-color
+      }
+    }
+  }
+
+  .text-#{$name} {
+    color: $brand-text !important;
+  }
+
+  .border-#{$name} {
+    border-color: $brand-text !important;
+  }
+
+  .text-#{$name}-deep {
+    color: $brand-text !important;
+
+    * {
+      color: $brand-text !important;
+    }
+  }
+}
+
+// ===================================
+// generate .rotate-10 , rotate-20 ...
+// ===================================
+@each $name, $value in $rotations {
+  // $class:$value*10;
+  $rotate: $value * 1deg;
+
+  html:lang(en) {
+    .rotate-#{$name} {
+      transform: rotate($rotate);
+    }
+  }
+
+  html:lang(ar) {
+    .rotate-#{$name} {
+      transform: rotate($rotate * -1);
+    }
+  }
+}
+
+// ===================================
+// generate font-sizes
+// ===================================
+
+@each $name, $value in $ui-fonts {
+  .font-#{$name} {
+    font-size: $value * 1px !important;
+
+    @include media-breakpoint-down(md) {
+      font-size: $value * 0.85px !important;
+    }
+  }
+
+  .font-#{$name}-deep {
+    font-size: $value * 1px !important;
+
+    @include media-breakpoint-down(md) {
+      font-size: $value * 0.85px !important;
+    }
+
+    * {
+      font-size: $value * 1px !important;
+
+      @include media-breakpoint-down(md) {
+        font-size: $value * 0.85px !important;
+      }
+    }
+  }
+
+  .line-height-#{$name} {
+    line-height: $value * 1px;
+
+    @include media-breakpoint-down(md) {
+      line-height: $value * 0.85px;
+    }
+  }
+
+  .line-height-#{$name}-deep {
+    line-height: $value * 1px;
+
+    @include media-breakpoint-down(md) {
+      line-height: $value * 0.85px;
+    }
+
+    * {
+      line-height: $value * 1px;
+
+      @include media-breakpoint-down(md) {
+        line-height: $value * 0.85px;
+      }
+    }
+  }
+
+}
+
+@each $name, $value in $ui-fonts-weights {
+  .font-weight-#{$name} {
+    font-weight: $value;
+  }
+
+  .font-weight-#{$name}-deep {
+    font-weight: $value;
+
+    * {
+      font-weight: $value;
+    }
+  }
+}
+
+// @each $name, $value in $ui-border-radius {
+//   .border-radius-#{$name} {
+//     border-radius: $value * 1px;
+//   }
+// }
+
+// @each $name, $value in $ui-line-heights {
+//   .line-height-#{$name} {
+//     line-height: $value;
+//   }
+// }
+
+// // ===================================
+// generate Z-indexes
+// // ===================================
+
+@each $name, $value in $z-indexes {
+  .z-index-#{$name} {
+    z-index: $value;
+  }
+}
+
+// // ===================================
+// generate spacers
+// // ===================================
+
+@each $name, $value in $spacer-variations {
+  .spacer-#{$name} {
+    height: $value * 1px;
+    width: 100%;
+    display: block;
+
+    @include media-breakpoint-down(md) {
+      height: $value * 0.6px;
+    }
+  }
+}
+
+@mixin on-circle($item-count, $circle-size, $item-size) {
+  position: relative;
+  width:  $circle-size;
+  height: $circle-size;
+  padding: 0;
+  border-radius: 50%;
+  list-style: none;
+
+  > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    top:  50%;
+    left: 50%;
+    width:  $item-size;
+    height: $item-size;
+    margin: -($item-size / 2);
+
+    $angle: (360 / $item-count);
+    $rot: 0;
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform:
+          rotate($rot * 1deg)
+          translate($circle-size / 2)
+          rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
+}

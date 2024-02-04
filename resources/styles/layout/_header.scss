@@ -1,0 +1,238 @@
+header {
+  .navbar {
+    min-height: 88px;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // z-index: 99999;
+
+    .caret {
+      display: inline-block;
+      margin-left: 2px;
+      width: 9px;
+      height: 6px;
+      background-image: url("data:image/svg+xml,<svg width='9' height='6' viewBox='0 0 9 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1.41992 1.30197L4.81597 4.69801L8.21201 1.30197' stroke='white' stroke-width='1.13201' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+    }
+
+    li {
+      &.active,
+      &:hover {
+        & > a {
+          color: $brand-primary !important;
+
+          .caret {
+            background-image: url("data:image/svg+xml,<svg width='9' height='6' viewBox='0 0 9 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1.41992 1.302L4.81597 4.69805L8.21201 1.302' stroke='OrangeRed' stroke-width='1.13201' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+          }
+        }
+      }
+    }
+
+    .navbar {
+      .languages {
+        .dropdown-menu {
+          .dropdown-item {
+            img {
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              margin-right: 10px;
+
+              [dir="rtl"] & {
+                margin-right: unset;
+                margin-left: 10px;
+              }
+            }
+
+            &.active,
+            &:active,
+            &:hover {
+              color: $brand-primary !important;
+              background-color: transparent;
+            }
+
+            [dir="rtl"] & {
+              text-align: right;
+            }
+          }
+        }
+
+        &:hover {
+          div,
+          svg path {
+            color: $brand-primary !important;
+            fill: $brand-primary;
+          }
+        }
+      }
+
+      .brand {
+        height: 80px;
+        line-height: 80px;
+      }
+
+      .navbar-toggler {
+        color: $brand-primary;
+        padding: 10px 15px;
+        border-color: $brand-primary;
+      }
+
+      @include media-breakpoint-up(md) {
+        .navbar-collapse {
+          .navbar-nav {
+            & > li {
+              &:not(:last-child) {
+                margin-right: 40px;
+
+                [dir="rtl"] & {
+                  margin-right: 0;
+                  margin-left: 40px;
+                }
+              }
+
+              & > a {
+                padding-top: 26.5px !important;
+                padding-bottom: 26.5px !important;
+                line-height: 27px;
+              }
+            }
+          }
+        }
+      }
+
+      @include media-breakpoint-down(md) {
+        .navbar-collapse {
+          .navbar-nav {
+            li {
+              a {
+                font-size: 14px !important;
+                line-height: 20px !important;
+              }
+            }
+
+            & > li {
+              &:not(:last-child) {
+                margin-bottom: 15px;
+              }
+            }
+          }
+        }
+      }
+
+      li.dropdown {
+        .dropdown-menu {
+          background: linear-gradient(180deg, #000 0, #000 100%, #000 100%);
+          margin: 0;
+          padding: 20px;
+          border-radius: 0;
+          min-width: 240px;
+          left: auto !important;
+
+          @include media-breakpoint-down(md) {
+            padding: 10px;
+          }
+
+          li {
+            width: 100%;
+            text-align: start;
+
+            &:not(:last-child) {
+              margin-bottom: 25px;
+
+              @include media-breakpoint-down(md) {
+                margin-bottom: 15px;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          & > .dropdown-menu {
+            display: block;
+          }
+        }
+
+        .dropdown-submenu {
+          position: relative;
+          width: 100%;
+          background: linear-gradient(180deg, #000 0, #000 100%, #000 100%);
+
+          &::after {
+            content: "";
+            position: absolute;
+            right: 15px;
+            top: 15%;
+            display: inline-block;
+            margin-left: 2px;
+            vertical-align: middle;
+            width: 7px;
+            height: 12px;
+            background-image: url("data:image/svg+xml,<svg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 10.396L5.396 6L1 1.604' stroke='white' stroke-width='1.46533' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            background-repeat: no-repeat;
+
+            [dir="rtl"] & {
+              right: auto;
+              left: 15px;
+              transform: rotate(180deg);
+            }
+          }
+
+          &.active,
+          &:hover {
+            &::after {
+              background-image: url("data:image/svg+xml,<svg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 10.396L5.396 6L1 1.604' stroke='OrangeRed' stroke-width='1.46533' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            }
+          }
+
+          .dropdown-menu {
+            left: 100% !important;
+            top: -26px !important;
+            width: 100%;
+            border-radius: 0;
+
+            @include media-breakpoint-up(md) {
+              border-left: 5px solid $brand-primary;
+
+              [dir=rtl] & {
+                border-left: unset;
+                border-right: 5px solid $brand-primary;
+              }
+            }
+
+            [dir=rtl] & {
+              left: auto !important;
+              right: 100% !important;
+            }
+
+            li {
+              width: 100%;
+
+              .dropdown-toggle {
+                &::after {
+                  opacity: 0;
+                }
+              }
+
+              &:hover {
+                & > a {
+                  color: $brand-primary;
+
+                  &::after {
+                    background-image: url("data:image/svg+xml,<svg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 10.396L5.396 6L1 1.604' stroke='OrangeRed' stroke-width='1.46533' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+                  }
+                }
+              }
+            }
+          }
+
+          &:hover {
+            .dropdown-menu {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
